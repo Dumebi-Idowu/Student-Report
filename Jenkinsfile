@@ -29,9 +29,8 @@ pipeline {
     }
 
     environment {
-        APP_VERSION  = '2.0.0'
-        REPORT_FILE  = 'student_report.txt'
-        NOTIFY_EMAIL = 'chukwudumebiuzoigwilo@gmail.com'
+        APP_VERSION = '2.0.0'
+        REPORT_FILE = 'student_report.txt'
     }
 
     stages {
@@ -89,7 +88,7 @@ pipeline {
         success {
             echo '✅ Build succeeded!'
             emailext(
-                to: "${env.NOTIFY_EMAIL}",
+                to: 'chukwudumebiuzoigwilo@gmail.com',
                 subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
 Hello Dumebi,
@@ -117,7 +116,7 @@ Jenkins
         failure {
             echo '❌ Build failed!'
             emailext(
-                to: "${env.NOTIFY_EMAIL}",
+                to: 'chukwudumebiuzoigwilo@gmail.com',
                 subject: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
 Hello Dumebi,
@@ -129,7 +128,7 @@ Build:   #${env.BUILD_NUMBER}
 Student: ${params.STUDENT_NAME}
 Score:   ${params.STUDENT_SCORE}
 
-Please check the console output for details:
+Please check the console output:
 ${env.BUILD_URL}console
 
 Regards,
