@@ -1,3 +1,5 @@
+# add this as the first line in student_report.py
+raise Exception("Deliberate failure to test notifications!")
 import os
 from datetime import datetime
 
