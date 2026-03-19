@@ -44,13 +44,18 @@ pipeline {
             }
         }
 
-        stage('Setup') {
-            steps {
-                echo 'Installing dependencies...'
-                sh 'pip install pytest -q'
-            }
-        }
-
+stage('Setup') {
+    steps {
+        echo 'Installing dependencies...'
+        sh '''
+            pip install pytest -q --timeout=120 --retries=3 \
+            --index-url https://pypi.org/simple/ \
+            || pip install pytest -q --timeout=120 \
+            --index-url https://mirrors.aliyun.com/pypi/simple/
+        '''
+    }
+}
+ 
         stage('Test') {
             steps {
                 echo 'Running tests...'
